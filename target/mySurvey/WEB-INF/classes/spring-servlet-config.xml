@@ -17,6 +17,7 @@
 			    http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <context:component-scan base-package="com.shu.controller"/>
+<!--    放行静态资源-->
     <mvc:default-servlet-handler/>
 
     <!--message-converters:HttpMessageConvert 负责将一个请求信息转换为一个对象（类型为T），将对象（类型为T）转换为响应信息。-->
@@ -42,6 +43,16 @@
         <constructor-arg value="UTF-8"/>
     </bean>
 
+<!--    <mvc:interceptors>-->
+<!--        <mvc:interceptor>-->
+<!--            <mvc:mapping path="/**/*"/>-->
+<!--            <mvc:exclude-mapping path="/reg"/>-->
+<!--            <mvc:exclude-mapping path="/login"/>-->
+<!--            <mvc:exclude-mapping path="/dy/*"/>-->
+<!--            <mvc:exclude-mapping path="/static/**"/>-->
+<!--            <bean class="com.shu.utils.SessionInterceptor" />-->
+<!--        </mvc:interceptor>-->
+<!--    </mvc:interceptors>-->
 <!--    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">-->
 <!--        <property name="converters">-->
 <!--            <set>-->
@@ -50,11 +61,11 @@
 <!--        </property>-->
 <!--    </bean>-->
 
-<!--    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"-->
-<!--          id="internalResourceViewResolver">-->
-<!--        <property name="suffix" value="WEB-INF"/>-->
-<!--        <property name="prefix" value=".jsp"/>-->
-<!--    </bean>-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          id="internalResourceViewResolver">
+        <property name="prefix" value="WEB-INF/page/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
 
 </beans>
 

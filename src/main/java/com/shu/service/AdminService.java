@@ -45,5 +45,15 @@ public class AdminService {
         return  adminDao.count(MapParameter.getInstance().put(BeanMapUtils.beanToMapForUpdate(admin)).getMap());
     }
 
+    /**
+     * 管理员登录
+     * @param account
+     * @param password
+     * @return
+     */
+    public Admin login(String account,String password){
+        Map<String, Object> map = MapParameter.getInstance().add("account",account).add("password",password).getMap();
+        return adminDao.detail(map);
+    }
 
 }
