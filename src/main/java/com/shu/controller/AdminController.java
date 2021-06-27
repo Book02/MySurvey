@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -48,6 +47,11 @@ public class AdminController {
         }else {
             return "success";
         }
+    }
+
+    @GetMapping("/list")
+    public String list(){
+        return "admin/list";
     }
 
     @GetMapping("/query")

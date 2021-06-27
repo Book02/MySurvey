@@ -80,10 +80,6 @@
                 layer.msg('密码不能为空');
                 return false;
             }
-            if (data.captcha == '') {
-                layer.msg('验证码不能为空');
-                return false;
-            }
             $.ajax({
                 url:'login',
                 type:'POST',
@@ -91,7 +87,11 @@
                 data:JSON.stringify(data),
                 contentType:'application/json',
                 success:function (data){
-                    console.log(data);
+                    if(data.code==200){
+                       location.href="index";
+                    }else {
+                        layer.msg(data.msg);
+                    }
                 }
             })
             return false;
