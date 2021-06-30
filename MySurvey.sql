@@ -11,7 +11,7 @@
  Target Server Version : 80016
  File Encoding         : 65001
 
- Date: 17/06/2021 22:00:32
+ Date: 30/06/2021 23:52:32
 */
 
 SET NAMES utf8mb4;
@@ -34,19 +34,11 @@ CREATE TABLE `tb_admin`  (
 -- ----------------------------
 -- Records of tb_admin
 -- ----------------------------
-INSERT INTO `tb_admin` VALUES (1, 'admin', '123', '陈康', '18570751111', NULL);
-INSERT INTO `tb_admin` VALUES (2, 'exo', '123', '肖胜涛', '18570752222', NULL);
+INSERT INTO `tb_admin` VALUES (1, 'admin', '7322cbd53acd46734fbb09bf8ccc29f7', '陈康', '18570751111', NULL);
+INSERT INTO `tb_admin` VALUES (2, 'exo', '5318009ce400285fdb32a23c09cfc8c7', '肖胜涛', '18570752222', NULL);
 INSERT INTO `tb_admin` VALUES (3, 'cusf', '123', '张清辉', '18570753333', NULL);
 INSERT INTO `tb_admin` VALUES (4, 'cctv', '123', '阿八哥', '18570754444', NULL);
 INSERT INTO `tb_admin` VALUES (5, 'China', '123', '中国', '1857075555', NULL);
-INSERT INTO `tb_admin` VALUES (7, 'US', NULL, NULL, NULL, NULL);
-INSERT INTO `tb_admin` VALUES (8, 'US', NULL, NULL, NULL, NULL);
-INSERT INTO `tb_admin` VALUES (9, 'US', NULL, NULL, NULL, NULL);
-INSERT INTO `tb_admin` VALUES (10, 'US', NULL, NULL, NULL, NULL);
-INSERT INTO `tb_admin` VALUES (11, 'ua', NULL, NULL, NULL, NULL);
-INSERT INTO `tb_admin` VALUES (12, 'sd', NULL, NULL, NULL, NULL);
-INSERT INTO `tb_admin` VALUES (13, 'sd', NULL, NULL, NULL, NULL);
-INSERT INTO `tb_admin` VALUES (14, NULL, NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for tb_answer_opt

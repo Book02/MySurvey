@@ -1,14 +1,16 @@
 package com.shu.utils;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MapControl {
 
     private Map<String,Object> paraMap=new HashMap<>();
 
-    public  static  int SUCCESS_CODE=200;
+    public  static  int SUCCESS_CODE=0;
     public  static  int ERROR_CODE=500;
+
     private MapControl(){
 
     }
@@ -54,6 +56,13 @@ public class MapControl {
     }
     public MapControl error(String str){
         return this.put("msg",str).put("code",ERROR_CODE);
+    }
+
+    public MapControl page(List<?> data, Integer count){
+        return this.put("msg","返回成功").put("code",SUCCESS_CODE).put("count",count).put("data",data);
+    }
+    public MapControl page(List<?> data,Integer count,int code){
+        return this.put("msg","返回成功").put("code",code).put("count",count).put("data",data);
     }
     
 

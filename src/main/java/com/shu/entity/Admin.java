@@ -1,6 +1,7 @@
 package com.shu.entity;
 
 
+import com.shu.utils.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,7 +17,7 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Admin  {
+public class Admin extends Entity {
 
 
 

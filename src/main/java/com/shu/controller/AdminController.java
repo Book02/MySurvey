@@ -2,12 +2,14 @@ package com.shu.controller;
 
 import com.shu.entity.Admin;
 import com.shu.service.AdminService;
+import com.shu.utils.MapControl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/admin")
@@ -54,22 +56,22 @@ public class AdminController {
         return "admin/list";
     }
 
-    @GetMapping("/query")
-    public String query(Admin admin, ModelMap modelMap){
-        List<Admin> list= adminService.query(admin);
-        modelMap.addAttribute("list",list);
-        return "../list.jsp";
-    }
 
-
-    @GetMapping("/query2")
+    @PostMapping("/query")
     @ResponseBody
-    public List<Admin> query2(Admin admin){
-        List<Admin> list= adminService.query(admin);
-        return list;
+    public Map<String,Object> query(@RequestBody Admin admin, ModelMap modelMap){
+        System.out.println(admin.getPage());
+        System.out.println(admin.getLimit());
+        System.out.println(admin.getAccount());
+        List<Admin> list = adminService.query(admin);
+        Integer count = adminService.count(admin);
+        return MapControl.getInstance().page(list,count).getMap();
     }
 
-    @RequestMapping("/detail")
+
+
+
+    @PostMapping("/detail")
     @ResponseBody
     public Admin detail(Integer id){
 

@@ -87,7 +87,7 @@
                 data:JSON.stringify(data),
                 contentType:'application/json',
                 success:function (data){
-                    if(data.code==200){
+                    if(data.code==0){
                        location.href="index";
                     }else {
                         layer.msg(data.msg);

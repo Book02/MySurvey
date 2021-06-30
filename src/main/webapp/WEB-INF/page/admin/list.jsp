@@ -14,42 +14,37 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="static/lib/layui-src/css/layui.css" media="all">
-    <link rel="stylesheet" href="static/css/public.css" media="all">
+    <link rel="stylesheet" href="../static/lib/layui-src/css/layui.css" media="all">
+    <link rel="stylesheet" href="../static/css/public.css" media="all">
 </head>
 <body>
 <div class="layuimini-container">
     <div class="layuimini-main">
 
         <fieldset class="table-search-fieldset">
-            <legend>搜索信息</legend>
+            <legend>查询条件</legend>
             <div style="margin: 10px 10px 10px 10px">
                 <form class="layui-form layui-form-pane" action="">
                     <div class="layui-form-item">
                         <div class="layui-inline">
-                            <label class="layui-form-label">用户姓名</label>
+                            <label class="layui-form-label">账号</label>
                             <div class="layui-input-inline">
                                 <input type="text" name="username" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-inline">
-                            <label class="layui-form-label">用户性别</label>
+                            <label class="layui-form-label">姓名</label>
                             <div class="layui-input-inline">
                                 <input type="text" name="sex" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-inline">
-                            <label class="layui-form-label">用户城市</label>
+                            <label class="layui-form-label">手机号码</label>
                             <div class="layui-input-inline">
                                 <input type="text" name="city" autocomplete="off" class="layui-input">
                             </div>
                         </div>
-                        <div class="layui-inline">
-                            <label class="layui-form-label">用户职业</label>
-                            <div class="layui-input-inline">
-                                <input type="text" name="classify" autocomplete="off" class="layui-input">
-                            </div>
-                        </div>
+
                         <div class="layui-inline">
                             <button type="submit" class="layui-btn layui-btn-primary"  lay-submit lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索</button>
                         </div>
@@ -74,7 +69,7 @@
 
     </div>
 </div>
-<script src="static/lib/layui-src/layui.js" charset="utf-8"></script>
+<script src="../static/lib/layui-src/layui.js" charset="utf-8"></script>
 <script>
     layui.use(['form', 'table'], function () {
         var $ = layui.jquery,
@@ -83,8 +78,10 @@
 
         table.render({
             elem: '#currentTableId',
-            url: 'data/table.json',
+            url: 'query',
             toolbar: '#toolbarDemo',
+            method:'post',
+            contentType: 'application/json',
             defaultToolbar: ['filter', 'exports', 'print', {
                 title: '提示',
                 layEvent: 'LAYTABLE_TIPS',
@@ -93,15 +90,11 @@
             cols: [[
                 {type: "checkbox", width: 50},
                 {field: 'id', width: 80, title: 'ID', sort: true},
-                {field: 'username', width: 80, title: '用户名'},
-                {field: 'sex', width: 80, title: '性别', sort: true},
-                {field: 'city', width: 80, title: '城市'},
-                {field: 'sign', title: '签名', minWidth: 150},
-                {field: 'experience', width: 80, title: '积分', sort: true},
-                {field: 'score', width: 80, title: '评分', sort: true},
-                {field: 'classify', width: 80, title: '职业'},
-                {field: 'wealth', width: 135, title: '财富', sort: true},
-                {title: '操作', minWidth: 150, toolbar: '#currentTableBar', align: "center"}
+                {field: 'account', width: 180, title: '用户名'},
+                {field: 'name', width: 280, title: '姓名', sort: true},
+                {field: 'phone', width: 280, title: '手机'},
+                {field: 'remark', title: '备注', minWidth: 250}
+
             ]],
             limits: [10, 15, 20, 25, 50, 100],
             limit: 15,
@@ -112,18 +105,16 @@
         // 监听搜索操作
         form.on('submit(data-search-btn)', function (data) {
             var result = JSON.stringify(data.field);
-            layer.alert(result, {
+            /*layer.alert(result, {
                 title: '最终的搜索信息'
-            });
-
+            });*/
             //执行搜索重载
             table.reload('currentTableId', {
                 page: {
                     curr: 1
-                }
-                , where: {
-                    searchParams: result
-                }
+                },
+                contentType:'application/json',
+                where: data.field
             }, 'data');
 
             return false;
