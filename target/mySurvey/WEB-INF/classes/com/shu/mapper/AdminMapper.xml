@@ -9,11 +9,11 @@
         <result column="password" 			property="password"/>
         <result column="phone" 			property="phone"/>
         <result column="remark" 			property="remark"/>
-<!--        <result column="type" 			property="type"/>-->
+        <result column="type" 			property="type"/>
     </resultMap>
 
     <insert id="create" keyProperty="id" useGeneratedKeys="true" parameterType="com.shu.entity.Admin">
-        insert into tb_admin(account,id,name,password,phone,remark) values(#{account},#{id},#{name},#{password},#{phone},#{remark})
+        insert into tb_admin(account,id,name,password,phone,remark,type) values(#{account},#{id},#{name},#{password}#{phone},#{remark},#{type})
     </insert>
 
     <select id="query" resultMap="Admin">
@@ -49,7 +49,7 @@
             <if test="password != null and password != ''">and password = #{password}</if>
             <if test="phone != null and phone != ''">and phone = #{phone}</if>
             <if test="remark != null and remark != ''">and remark = #{remark}</if>
-<!--            <if test="type != null">and type = #{type}</if>-->
+            <if test="type != null">and type = #{type}</if>
         </where>
     </sql>
     <sql id="AdminUpdateCriteria">
@@ -60,7 +60,7 @@
             <if test="updatePassword != null and updatePassword != ''">password = #{updatePassword},</if>
             <if test="updatePhone != null and updatePhone != ''">phone = #{updatePhone},</if>
             <if test="updateRemark != null and updateRemark != ''">remark = #{updateRemark},</if>
-<!--            <if test="updateType != null">type = #{updateType},</if>-->
+            <if test="updateType != null">type = #{updateType},</if>
         </set>
     </sql>
 </mapper>

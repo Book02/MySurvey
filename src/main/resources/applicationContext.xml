@@ -39,12 +39,25 @@
                 <value>classpath:com/shu/mapper/*.xml</value>
             </list>
         </property>
+
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <value>
+                            helperDialect=mysql
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
     </bean>
 
     <!--配置扫描Mapper文件-->
     <bean id="mapperScanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.shu.mapper"></property>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+
     </bean>
 
 

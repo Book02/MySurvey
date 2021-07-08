@@ -1,37 +1,29 @@
 {
   "homeInfo": {
     "title": "阿书问卷管理",
-    "href": "survey/list"
+    "href": ""
   },
   "logoInfo": {
-    "title": "调查问卷",
-    "image": "",
+    "title": "阿书调查问卷",
+    "image": "static/images/logo.jpg",
     "href": ""
   },
   "menuInfo": [
     {
-      "title": "问卷管理",
+      "title": "调查问卷管理",
       "icon": "fa fa-address-book",
       "href": "",
       "target": "_self",
       "child": [
         {
-          "title": "问卷管理1",
+          "title": "问卷管理",
           "href": "survey/list",
           "icon": "fa fa-window-maximize",
-          "target": "_self",
-          "child": [
-            {
-              "title": "问卷管理3",
-              "href": "survey/list",
-              "icon": "fa fa-window-maximize",
-              "target": "_self"
-            }
-          ]
+          "target": "_self"
         },
         {
           "title": "问卷管理2",
-          "href": "survey/list",
+          "href": " ",
           "icon": "fa fa-window-maximize",
           "target": "_self"
         }

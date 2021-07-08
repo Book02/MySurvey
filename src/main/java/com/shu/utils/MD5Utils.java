@@ -2,6 +2,7 @@ package com.shu.utils;
 
 import org.springframework.util.DigestUtils;
 
+
 public class MD5Utils {
 
     //盐值

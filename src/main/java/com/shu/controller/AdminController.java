@@ -2,6 +2,7 @@ package com.shu.controller;
 
 import com.shu.entity.Admin;
 import com.shu.service.AdminService;
+import com.shu.utils.MD5Utils;
 import com.shu.utils.MapControl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,37 +19,45 @@ public class AdminController {
     @Autowired
     AdminService adminService;
 
+    @GetMapping("/add")
+    public String add(Admin admin){
+       return "admin/add";
+    }
+
     @PostMapping("/create")
     @ResponseBody
-    public String create(Admin admin){
+    public Map<String,Object> create(@RequestBody Admin admin){
+        admin.setPassword(MD5Utils.getMD5(admin.getPassword()));
       int result= adminService.create(admin);
       if(result<=0){
-          return "错误";
+          System.out.println(MapControl.getInstance().error().getMap());
+          return MapControl.getInstance().error().getMap();
       }else {
-          return "正确";
+          System.out.println(MapControl.getInstance().success().getMap());
+          return MapControl.getInstance().success().getMap();
       }
     }
 
     @PostMapping("/delete")
     @ResponseBody
-    public String delete(Integer id){
-        int result=adminService.delete(id);
+    public Map<String,Object> delete(String ids){
+        int result = adminService.deleteBatch(ids);
         if(result<=0){
-            return "错误";
-        }else {
-            return "正确";
+            //失败的情况下
+            return MapControl.getInstance().error().getMap();
         }
+        return MapControl.getInstance().success().getMap();
     }
 
     @PostMapping("/update")
     @ResponseBody
-    public String update(Admin admin){
+    public Map<String,Object> update(@RequestBody Admin admin){
         int result=adminService.update(admin);
         if(result<=0){
-            return "error";
-        }else {
-            return "success";
-        }
+            return MapControl.getInstance().error().getMap();
+        }else
+           return  MapControl.getInstance().success().getMap();
+
     }
 
     @GetMapping("/list")
@@ -60,6 +69,7 @@ public class AdminController {
     @PostMapping("/query")
     @ResponseBody
     public Map<String,Object> query(@RequestBody Admin admin, ModelMap modelMap){
+
         System.out.println(admin.getPage());
         System.out.println(admin.getLimit());
         System.out.println(admin.getAccount());
@@ -71,12 +81,11 @@ public class AdminController {
 
 
 
-    @PostMapping("/detail")
-    @ResponseBody
-    public Admin detail(Integer id){
-
-        return adminService.detail(id);
-
+    @GetMapping("/detail")
+    public String detail(Integer id,ModelMap modelMap){
+        Admin admin = adminService.detail(id);
+        modelMap.addAttribute("admin",admin);
+        return "admin/update";
     }
 
 }
