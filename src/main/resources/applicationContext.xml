@@ -60,6 +60,9 @@
 
     </bean>
 
+    <bean class="com.shu.utils.SystemInit" init-method="init"></bean>
+    <bean class="com.shu.utils.ScheduleTask"  ></bean>
+
 
 
 

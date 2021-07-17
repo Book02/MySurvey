@@ -75,9 +75,12 @@ public class SurveyController {
 
     @PostMapping("/query")
     @ResponseBody
-    public Map<String,Object> query(@RequestBody Survey survey, ModelMap modelMap){
+    public Map<String,Object> query(@RequestBody Survey survey, HttpServletRequest request,ModelMap modelMap){
 
         List<Survey> list = surveyService.query(survey);
+        for (Survey entity : list) {
+            entity.setAdmin(SystemInit.adminMap.get(entity.getCreator()));
+        }
         Integer count = surveyService.count(survey);
         return MapControl.getInstance().page(list,count).getMap();
     }

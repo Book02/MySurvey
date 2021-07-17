@@ -56,7 +56,6 @@
                     <i class="fa fa-remove"></i>
                     删除 </button>
 
-
             </div>
         </script>
         <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
@@ -71,6 +70,24 @@
             form = layui.form,
             table = layui.table;
 
+        function DateFormat(sjc){
+            var date = new Date(sjc);
+            var y = date.getFullYear();
+            var m = date.getMonth()+1;
+            m = m<10?'0'+m:m;
+            var d = date.getDate();
+            d = d<10?("0"+d):d;
+            var h = date.getHours();
+            h = h<10?("0"+h):h;
+            var min = date.getMinutes();
+            min = min<10?("0"+min):min;
+            var s = date.getSeconds();
+            s = s<10?("0"+s):s;
+            var str = y+"-"+m+"-"+d+" "+h+":"+min+":"+s;
+            return str;
+        }
+
+
         table.render({
             elem: '#currentTableId',
             url: 'query',
@@ -80,17 +97,16 @@
             defaultToolbar: ['filter', 'exports', 'print'],
             cols: [[
                 {type: "checkbox", width: 50},
-                {field: 'id', width: 80, title: 'ID', sort: true},
-                {field: 'title', title: '问卷标题',width: 150},
-                {field: 'url',width:300, title: '问卷URL'},
-                {field: 'startTime', width: 130, title: '开始时间'},
-                {field: 'endTime', width: 130, title: '结束时间'},
-                {field: 'state', width: 80, title: '状态'},
-                {field: 'name', width: 100, title: '创建人',templet:'<div>{{d.admin.name}}</div>'},
+                {field: 'id', width: 70, title: 'ID', sort: true},
+                {field: 'title', title: '问卷标题',width: 300},
+                {field: 'startTime', width: 220, title: '开始时间'},
+                {field: 'endTime', width: 220, title: '结束时间'},
+                {field: 'state', width: 120, title: '状态'},
+                {field: 'creator', width: 100, title: '创建人'},
                 {field: 'createTime',width: 200,title: '创建时间'}
             ]],
             limits: [10, 15, 20, 25, 50, 100],
-            limit: 15,
+            limit: 10,
             page: true,
             skin: 'line'
         });
@@ -124,7 +140,7 @@
                     shade: 0.2,
                     maxmin:false,
                     shadeClose: true,
-                    area: ['85%', '95%'],
+                    area: ['70%', '70%'],
                     content: 'add',
                     end:function(){
                         table.reload('currentTableId');
@@ -153,7 +169,7 @@
                         layer.msg(data.msg,{time:500},
                             function(){
                                 table.reload('currentTableId');
-                        });
+                            });
                     }
                 });
             }else if (obj.event === 'edit') {  // 监听编辑操作
@@ -306,3 +322,4 @@
 
 </body>
 </html>
+

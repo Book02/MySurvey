@@ -6,6 +6,7 @@ import com.shu.service.AdminService;
 import com.shu.utils.MD5Utils;
 import com.shu.utils.MapControl;
 import com.shu.utils.MapParameter;
+import com.shu.utils.SessionUtils;
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,8 +38,7 @@ public class LoginController {
         Admin admin=adminService.login(account, MD5Utils.getMD5(password));
         if(admin!=null){
             //??session视频
-            HttpSession session=request.getSession();
-            session.setAttribute("admin",admin);
+            SessionUtils.setAdmin(request,admin);
             return MapControl.getInstance().success().getMap();
         }else{
             return MapControl.getInstance().error("用户名或密码错误").getMap();
